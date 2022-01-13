@@ -1,7 +1,9 @@
 'use strict';
 
-const carsMake = [];
-let carsMakeUnique = [];
+import {btnCalculate} from './Calculate.js';
+
+// const numbers = [];
+let numbersSorted = [];
 // const carsMakeUniqueAmmount = [];
 
 window.onload = () => {
@@ -20,36 +22,32 @@ window.onload = () => {
     document.getElementById('content').appendChild(btn);
 
     const btnCal = document.getElementById('btnCalc');
-    btnCal.addEventListener('click', btnCalcCars);
+    btnCal.addEventListener('click', calcFunc);
     
 }
 
 const btnClick = () => {
     const currentValue = document.getElementById('inputValue').value;
 
-    carsMake.push(currentValue);
-
-    carsMakeUnique = [];
-
-    let temp = [...new Set(carsMake.map(cars => cars))]; //Map function to get the unique cars from the list
-
-    temp.forEach(car => { //Gets the ammount of times the unique car occurs in the array and pushes the result to carsMakeUnique
-        let ammount = carsMake.filter((v) => (v == car)).length;
-        carsMakeUnique.push(car + ', ' + ammount);
-    });
-
-    console.log(carsMakeUnique);
+    numbersSorted = currentValue.split(' ').sort((a, b) => a - b); //Sorts the array with the numbers in size order
 }
 
-const btnCalcCars = () => {
-    // for (let i = 0; i < carsMakeUnique.length; i++) {
-    //     let listItem = document.createElement('li');
-    //     listItem.innerHTML = carsMakeUnique;
-    //     document.getElementById('content').appendChild(listItem);
-    // }
-    carsMakeUnique.forEach(car => {
-        let listItem = document.createElement('li');
-        listItem.innerHTML = car;
-        document.getElementById('content').appendChild(listItem);
-    }); 
+const calcFunc = () => {
+    btnCalculate(numbersSorted);
 }
+
+// const btnCalculate = () => {
+//     console.log(numbersSorted);
+
+//     numbersSorted.forEach((num, counter) => {
+//         numbersSorted[counter] = `${num}(${num*num})`;
+//     });
+
+//     console.log(numbersSorted);
+
+//     numbersSorted.forEach(num => {
+//         let listItem = document.createElement('li');
+//         listItem.innerHTML = num;
+//         document.getElementById('content').appendChild(listItem);
+//     }); 
+// }
